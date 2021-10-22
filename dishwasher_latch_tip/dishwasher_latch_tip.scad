@@ -3,7 +3,7 @@ h = 2.50 + 0.2;
 d = 17.86 + 0.2;
 lg = 100;
 
-btw = 4; // border thichness width direction
+btw = 2; // border thichness width direction
 bth = 3; // border thichness height direction
 
 
@@ -23,10 +23,21 @@ module screw_hole(dl, ds) {
 }
 
 difference() {
-	translate([-btw-w/2,-bth-h/2,0]) cube([w+2*btw, h+2*bth, d+8]);
+    intersection() {
+        minkowski() {
+            rotate([90,0,0]) sphere(r=1, $fn=20);
+            difference() {
+                translate([-btw-w/2,-bth-h/2,0]) cube([w+2*btw, h+2*bth, d+8]);
+                translate([0,0,d+8]) mirror([0,0,1])
+                    scube(x=w,xs=5, y=lg, z=4, center=true);
+            }
+        }
+        linear_extrude(lg) square([lg,lg], center=true);
+    }
 	translate([-w/2,-h/2,0]) cube([w,h,d]);
-    translate([0,0,d+8]) mirror([0,0,1])
-        scube(x=w,xs=5, y=lg, z=4, center=true);
+
     
-    #translate([0,h/2+1,d-0.2-2.6]) rotate([90,0,0]) screw_hole(dl=5.5, ds=2.8*1.1);
+    ds = 2.8;
+    translate([0,h/2+2.5,d-0.2-2.6-ds/2]) rotate([90,0,0]) 
+        screw_hole(dl=5.5, ds=ds);
 }	
