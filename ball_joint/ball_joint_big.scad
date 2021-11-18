@@ -10,7 +10,7 @@ module ball_joint(d, th, gap) {
                 }
                 sphere(d=d+gap);
                 translate([0,0,od*0.25]) 
-                    linear_extrude(h=od) square([od,od], center=true);
+                    linear_extrude(od) square([od,od], center=true);
                 translate([0,0,-od/2]) cylinder(d=od/2, h=od/2);
             }
             
