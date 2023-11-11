@@ -12,7 +12,7 @@ module corner() {
 }
 
 module mag() {
-    linear_extrude(3.2) square(3.1, center=true);
+    linear_extrude(3.2) square(3.9, center=true);
 }
 
 // ipad dimension: 178.52 x 247.64 mm
@@ -87,5 +87,9 @@ module upper_part() {
     }
 }  
 
+//intersection() {
+//    lower_part();
+//    translate([-15,0,0]) cube([40,50,50], center=true);
+//}
 lower_part();
 translate([0,-150,0]) upper_part();
